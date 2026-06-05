@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: 'Courier New', Courier, monospace;
+            background: linear-gradient(rgb(1, 3, 43), rgb(16, 101, 180), black);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .form{
+            border: 1px solid rgb(250, 250, 250);
+            margin: auto;
+            padding: 15px;
+            width: 400px; 
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(7, 26, 68);
+            align-items: center;
+            border-radius: 10px;
+
+        }
+        .form h2{
+            color: whitesmoke;
+            text-align: left;
+        }
+
+        .form .error{
+            border: 1px solid white;
+            color: white;
+            border-radius: 8px;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            /* height: 45px; */
+            align-items: center;
+            margin-bottom: 6px;
+            display: none;
+            cursor: pointer;
+        }
+        .form .success{
+            border: 1px solid white;
+            color: white;
+            border-radius: 8px;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            display:   none;
+            cursor: pointer;
+        }
+
+        input{
+            width: 98%;
+            height: 38px;
+            margin: 10px;
+            padding: 5px;
+            color: white;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 8px;
+           background-color: rgb(13, 13, 123)
+
+        }
+        input::placeholder{
+            color: white;
+        }
+        
+        .button{
+            background-color: rgb(9, 9, 157);
+            width: 100%;
+            height: 35px;
+        }
+            
+        
+        .button:hover{
+            background-color: rgb(9, 9, 142);
+            transition: ease-in-out 0.3s;
+            transform: scale(1.03);
+        }
+</style>
+<body>
+    <form action="" class="form">
+        <h2 id="h2Message">Age validation</h2>
+        <div class="error">
+            <span id="errorMessage"></span>
+            <span id="closeError">x</span>
+        </div>
+        <div class="success">
+            <span id="successMessage"></span>
+            <span id="closeSuccess">x</span>
+        </div>
+        <input id="age" type="text" placeholder="Enter Age">
+        <input  type="submit" class="button" value="validate">
+    </form>
+     
+    
+    <script>
+
+         let button = document.querySelector(".button");
+         let closeError = document.getElementById("closeError");
+         let closeSuccess = document.getElementById("closeSuccess");
+
+         let error = document.querySelector(".error");
+         let success = document.querySelector(".success");
+
+         let errorMessage = document.getElementById("errorMessage");
+         let successMessage = document.getElementById("successMessage");
+         let h2Message = document.getElementById("h2Message")
+
+         closeError.addEventListener("click", () =>{
+                 error.style.display = "none";
+         })
+                // EVENT FOR CLOSE SUCCCESS
+         closeSuccess.addEventListener("click", () =>{
+                 success.style.display = "none";
+         })
+
+            button.addEventListener("click", (event) => {
+                event.preventDefault();
+                let ageInput = document.getElementById("age").value;
+                let age = Number(ageInput);
+
+            if ((age == "")){
+                error.style.display = "flex";
+                success.style.display = "none";
+                errorMessage.textContent = "Enter the fucking number";
+                // return;
+            }
+            else if( age < 18){
+                error.style.display = "flex";
+                success.style.display = "none";
+                errorMessage.textContent = "gerrout you small ass kid";
+                return;  
+            }
+
+             else if( isNaN(age)){
+                error.style.display = "flex";
+                success.style.display = "none";
+                errorMessage.textContent = "its for age you dumbass";
+            }
+            else if( age >= 41){
+                error.style.display = "flex";
+                success.style.display = "none";
+                errorMessage.textContent = "you are too old for this site";
+            }
+            else {
+                successMessage.textContent = "success your age is valid";
+                h2Message.textContent = "Access Granted"
+                error.style.display = "none";
+                success.style.display = "flex";
+            }
+        });
+
+
+
+
+    </script>
+
+</body>
+</html>
